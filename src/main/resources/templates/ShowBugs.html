@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Bug Tracker</title>
+  <style>
+    body {
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      margin: 10% auto;
+      width: 80%;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0px 0px 5px grey;
+    }
+
+    table {
+      margin-top: 20px;
+    }
+
+    th {
+      font-weight: bold;
+    }
+
+    td {
+      vertical-align: middle;
+    }
+    nav{
+      position: sticky;
+      top: 0px;
+    }
+
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Bug Tracker</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/auth/ShowAllTheBugs">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/FixedBugs">Bugs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/auth/bugs/add" >Add Bug</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/auth/bugs/add" >LogOut</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <h1 class="text-center">Bug List</h1>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Complete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="bug : ${bugs}">
+      <td th:text="${bug.id}"></td>
+      <td th:text="${bug.title}"></td>
+      <td th:text="${bug.description}"></td>
+      <td th:text="${bug.getPriority()}"></td>
+      <td><a class="btn btn-primary" th:href="@{/Update/{id}(id=${bug.id})}">Fixed</a></td>
+    </tr>
+    </tbody>
+
+  </table>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
